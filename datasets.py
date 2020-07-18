@@ -89,7 +89,7 @@ class featureReader:
           in_steps.append(np.array(lines[n-i]))
         
         _line = np.array(in_steps)
-        if self.rotate is true:
+        if self.rotate is True:
         	_line = np.rot90(np.asarray(_line), 1)
         #print(">shape: ", _line.shape)
         #_line = _line.reshape(_line.shape[0], _line.shape[1], 1)
