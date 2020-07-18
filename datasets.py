@@ -10,13 +10,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 class featureReader:
-  def __init__(self, groups=[], look_back=50, horizon=8, dataRange=(0,1), featureShape="matrix", cache=True):
+  def __init__(self, groups=[], look_back=50, horizon=8, dataRange=(0,1), featureShape="matrix", cache=True, rotate=True):
     self.groups       = groups
     self.look_back    = look_back
     self.horizon      = horizon
     self.dataRange    = dataRange
     self.cache        = cache
     self.featureShape = featureShape
+    self.rotate       = rotate
     self.dfCache      = {}
   
   def valmap(self, value, istart, istop, ostart, ostop):
@@ -87,8 +88,9 @@ class featureReader:
         for i in range(self.look_back-1, -1, -1):
           in_steps.append(np.array(lines[n-i]))
         
-        _line = np.array(in_steps);
-        _line = np.rot90(np.asarray(_line), 1)
+        _line = np.array(in_steps)
+        if self.rotate is true:
+        	_line = np.rot90(np.asarray(_line), 1)
         #print(">shape: ", _line.shape)
         #_line = _line.reshape(_line.shape[0], _line.shape[1], 1)
         _line = self.reshapeFeatures(_line)
